@@ -185,6 +185,25 @@
             });
         });
 
+                /*-- Fade-in-on-Scroll Animation Script --*/
+        $(document).ready(function() {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
         /*-- Click-Smoth-Scroll-Script --*/
         $('.mainmenu-area a[href*="#"]')
             .not('[href="#"]')
@@ -197,9 +216,12 @@
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                     // Does a scroll target exist?
                     if (target.length) {
-                        // Manually trigger the slicknav close function. This will fire the 'close' callback.
-                        if ($('.slicknav_menu').is(':visible')) {
-                            $('.primary-menu').slicknav('close');
+                        // Forcefully and manually close the Bootstrap menu by direct DOM manipulation.
+                        // This is the definitive brute-force fix to bypass all other script conflicts.
+                        var collapseElement = $('.navbar-collapse.show');
+                        if (collapseElement.length) {
+                            collapseElement.removeClass('show');
+                            $('.navbar-toggler').addClass('collapsed').attr('aria-expanded', 'false');
                         }
 
                         // Only prevent default if animation is actually gonna happen

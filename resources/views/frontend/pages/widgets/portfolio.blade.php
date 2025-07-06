@@ -1,4 +1,4 @@
-<section class="portfolio-area section-padding-top" id="portfolio-page">
+<section class="portfolio-area section-padding-top fade-in-section" id="portfolio-page">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">

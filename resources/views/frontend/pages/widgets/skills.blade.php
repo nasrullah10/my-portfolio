@@ -1,4 +1,4 @@
-<section class="skills-area section-padding-top" id="skills-page">
+<section class="skills-area section-padding-top fade-in-section" id="skills-page">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">

@@ -29,6 +29,24 @@
     fill: #FFFFFF; /* White text on load */
 }
 
+/* --- Mobile Menu Styling & Animation --- */
+.navbar-collapse.show {
+    background-color: #0D0040; /* Dark blue to match the theme */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.navbar-collapse {
+    transition: height 0.35s ease-in-out;
+}
+
+/* --- General Animation & Transition Polish --- */
+a,
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
 /* --- Inner Pages Header (Solid on Load) --- */
 .inner-header {
     background-color: #ffffff;
