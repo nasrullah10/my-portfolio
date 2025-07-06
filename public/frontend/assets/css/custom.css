@@ -42,6 +42,11 @@
     fill: #190844; /* Dark text on load */
 }
 
+/* --- Definitive Inner Page Link Color Fix --- */
+.inner-header .navbar-nav .nav-link {
+    color: #190844; /* Dark links for inner pages */
+}
+
 /* --- Fixed Header on Scroll (Both Pages) --- */
 
 .main_menu.menu_fix {
