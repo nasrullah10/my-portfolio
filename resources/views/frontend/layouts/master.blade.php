@@ -38,37 +38,39 @@
           </text>
       </svg>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#homeNavbarNav"
+        aria-controls="homeNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i class="far fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#home-page">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about-page">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#portfolio-page">Portfolio <i class="fas fa-angle-down"></i></a>
-            <ul class="sub_menu">
-              <li><a href="/portfolio">All Portfolio</a></li>
+      <div class="collapse navbar-collapse" id="homeNavbarNav">
+        <div class="mainmenu-area">
+            <ul class="navbar-nav ms-auto" id="primary-menu">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#home-page">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about-page">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#portfolio-page">Portfolio <i class="fas fa-angle-down"></i></a>
+                <ul class="sub_menu">
+                  <li><a href="/portfolio">All Portfolio</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#skills-page">Skills</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#blog-page">Blog <i class="fas fa-angle-down"></i></a>
+                <ul class="sub_menu">
+                  <li><a href="{{route('blog')}}">All Blog</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact-page">Contact</a>
+              </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#skills-page">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#blog-page">Blog <i class="fas fa-angle-down"></i></a>
-            <ul class="sub_menu">
-              <li><a href="{{route('blog')}}">All Blog</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact-page">Contact</a>
-          </li>
-        </ul>
+        </div>
       </div>
     </div>
   </nav>

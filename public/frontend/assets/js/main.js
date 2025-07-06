@@ -185,20 +185,6 @@
             });
         });
 
-        /*-- Mobile-Menu-Active --*/
-        $('.primary-menu').slicknav({
-            label: '',
-            duration: 500,
-            prependTo: '',
-            closedSymbol: '<i class="fa fa-angle-right"></i>',
-            openedSymbol: '<i class="fa fa-angle-right"></i>',
-            appendTo: '.mainmenu-area',
-            menuButton: '.navi-trigger',
-            closeOnClick: true // Close menu when a link is clicked.
-        });
-
-
-
         /*-- Click-Smoth-Scroll-Script --*/
         $('.mainmenu-area a[href*="#"]')
             .not('[href="#"]')
@@ -211,6 +197,11 @@
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                     // Does a scroll target exist?
                     if (target.length) {
+                        // Manually trigger the slicknav close function. This will fire the 'close' callback.
+                        if ($('.slicknav_menu').is(':visible')) {
+                            $('.primary-menu').slicknav('close');
+                        }
+
                         // Only prevent default if animation is actually gonna happen
                         event.preventDefault();
                         $('html, body').animate({
@@ -249,9 +240,7 @@
                 mobile: false,
             });
         });
-        $('.navi-trigger').on('click', function () {
-            $(this).toggleClass('active');
-        });
+
 
         // SLIDER
         var menu = [];
