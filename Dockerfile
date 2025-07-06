@@ -1,9 +1,11 @@
 FROM php:8.2-fpm
 
-# Install required PHP extensions and tools
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
-    libzip-dev zip unzip git curl sqlite3 libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_sqlite zip
+    zip unzip git curl sqlite3 libsqlite3-dev \
+    libjpeg-dev libpng-dev libfreetype6-dev libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_sqlite zip gd
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -11,7 +13,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy your project files
+# Copy project files
 COPY . .
 
 # Install Laravel dependencies
@@ -20,7 +22,7 @@ RUN composer install --no-dev --optimize-autoloader
 # Create SQLite DB file
 RUN touch /tmp/database.sqlite
 
-# Set permissions
+# Set permissions for Laravel
 RUN chmod -R 755 storage bootstrap/cache
 
 EXPOSE 8000
