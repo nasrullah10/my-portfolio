@@ -23,7 +23,7 @@ This portfolio website is designed and developed using Laravel, a PHP framework 
 1. In your root folder, clone the project file using the command
 
 ```bash
-  git clone https://github.com/mokammeltanvir/Portfolio-Web-Laravel.git
+  git clone https://github.com/nasrullah10/my-portfolio.git
 
 ```
 
