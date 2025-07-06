@@ -1,3 +1,21 @@
+/*
+========================================
+    - Header Layout Fix (Definitive) -
+========================================
+*/
+/*
+  The theme adds an extra 'mainmenu-area' div that breaks Bootstrap's
+  flexbox alignment. This rule forces that div to act as a flex
+  container on desktop, pushing the navigation links to the right.
+*/
+@media (min-width: 992px) {
+    .mainmenu-area {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+
 /* --- Header Logo Size Fix --- */
 .main_menu .navbar-brand svg {
     width: 250px;
@@ -43,8 +61,13 @@
 }
 
 /* --- Definitive Inner Page Link Color Fix --- */
-.inner-header .navbar-nav .nav-link {
-    color: #190844; /* Dark links for inner pages */
+.inner-header .navbar-nav .nav-link,
+.inner-header .navbar-nav .nav-link.active {
+    color: #190844 !important; /* Dark links for inner pages */
+}
+
+.inner-header .navbar-nav .nav-link:hover {
+    color: #ff885e !important; /* Orange on hover */
 }
 
 /* --- Fixed Header on Scroll (Both Pages) --- */

@@ -3,10 +3,11 @@ FROM node:18 as node-builder
 
 WORKDIR /app
 COPY package*.json vite.config.js ./
+COPY public ./public           # ✅ Must exist so Vite can build to public/build
 COPY resources ./resources
 RUN npm install && npm run build
 
-# 2️⃣ PHP Laravel app
+# 2️⃣ Laravel PHP stage
 FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -19,17 +20,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy Laravel code
 COPY . .
 
-# ⬅️ CRITICAL: Copy Vite build output
 COPY --from=node-builder /app/public/build /var/www/public/build
 
-
-# Install PHP dependencies
 RUN composer install --optimize-autoloader
-
-# Set permissions
 RUN chmod -R 755 storage bootstrap/cache
 
 CMD php artisan config:clear && \
