@@ -3,15 +3,24 @@
 
 
     //======menu fix js======
-    if ($('.main_menu').offset() != undefined) {
-        var navoff = $('.main_menu').offset().top;
+    if ($('.main_menu').length) {
+        var nav = $('.main_menu');
+        var navHeight = nav.outerHeight();
+        var navoff = nav.offset().top;
+
         $(window).scroll(function () {
             var scrolling = $(this).scrollTop();
 
             if (scrolling > navoff) {
-                $('.main_menu').addClass('menu_fix');
+                if (!nav.hasClass('menu_fix')) {
+                    nav.addClass('menu_fix');
+                    $('body').css('padding-top', navHeight + 'px');
+                }
             } else {
-                $('.main_menu').removeClass('menu_fix');
+                if (nav.hasClass('menu_fix')) {
+                    nav.removeClass('menu_fix');
+                    $('body').css('padding-top', 0);
+                }
             }
         });
     }

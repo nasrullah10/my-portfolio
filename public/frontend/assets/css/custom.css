@@ -6,7 +6,7 @@
 
 /*
 ========================================
-    - Header & Logo Styles -
+    - Header & Logo Styles (Definitive Fix) -
 ========================================
 */
 
@@ -21,7 +21,7 @@
 /* --- Homepage Header (Transparent on Load) --- */
 .home-header {
     background-color: transparent;
-    position: absolute; /* Sits over the hero image */
+    position: absolute;
     width: 100%;
     z-index: 999;
 }
@@ -32,7 +32,7 @@
 /* --- Inner Pages Header (Solid on Load) --- */
 .inner-header {
     background-color: #ffffff;
-    position: relative; /* Sits in the normal document flow */
+    position: relative;
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
@@ -42,6 +42,11 @@
 
 /* --- Fixed Header on Scroll (Both Pages) --- */
 .main_menu.menu_fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     background-color: #ffffff;
     border-bottom: 1px solid #eee;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
