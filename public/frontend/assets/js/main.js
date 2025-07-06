@@ -185,26 +185,7 @@
             });
         });
 
-                /*-- Fade-in-on-Scroll Animation Script --*/
-        $(document).ready(function() {
-            const sections = document.querySelectorAll('.fade-in-section');
-
-            const observer = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                });
-            }, { threshold: 0.1 });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-
-        /*-- Click-Smoth-Scroll-Script --*/
+                /*-- Click-Smoth-Scroll-Script --*/
         $('.mainmenu-area a[href*="#"]')
             .not('[href="#"]')
             .not('[href="#0"]')

@@ -1,4 +1,4 @@
-<section class="testimonial-area fade-in-section">
+<section class="testimonial-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">

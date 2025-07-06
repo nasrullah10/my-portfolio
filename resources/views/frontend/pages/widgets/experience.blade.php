@@ -1,4 +1,4 @@
-<section class="experience-area section-padding fade-in-section">
+<section class="experience-area section-padding">
     <div class="container">
         <div class="row d-flex align-items-center">
             <div class="col-lg-6 d-none d-lg-block">
