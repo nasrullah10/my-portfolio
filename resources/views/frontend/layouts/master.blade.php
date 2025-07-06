@@ -14,14 +14,14 @@
   @include('frontend.layouts.inc.style')
 </head>
 
-<body>
+<body class="{{ request()->routeIs('home') ? 'home-page-body dynamic-home' : 'inner-page-body dynamic-inner' }}">
   <div class="preloader">
     <img src="{{ asset('frontend/assets') }}/images/preloader.gif" alt="">
   </div>
 
   <!-- include Navbar -->
 @if(Request::is('/'))
-<nav class="navbar navbar-expand-lg main_menu" id="main_menu_area">
+<nav class="navbar navbar-expand-lg main_menu home-header" id="main_menu_area">
     <div class="container">
       <a class="navbar-brand" href="/">
         <svg viewBox="0 0 250 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">

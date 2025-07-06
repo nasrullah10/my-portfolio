@@ -1,10 +1,10 @@
 FROM php:8.2-fpm
 
-# Install dependencies
+# Install system dependencies + Node.js + npm
 RUN apt-get update && apt-get install -y \
-    zip unzip git curl sqlite3 libsqlite3-dev libonig-dev \
-    libjpeg-dev libpng-dev libfreetype6-dev libzip-dev libpq-dev \
-    nodejs npm \
+    curl gnupg2 ca-certificates lsb-release unzip git zip sqlite3 libsqlite3-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libzip-dev libpq-dev \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_sqlite zip gd mbstring
 
@@ -17,19 +17,15 @@ WORKDIR /var/www
 # Copy project files
 COPY . .
 
-# Install PHP deps
+# Install PHP dependencies
 RUN composer install --optimize-autoloader
 
-# Build assets with Vite
+# Build frontend assets
 ENV NODE_ENV=production
 RUN npm install && npm run build
 
 # Set permissions
 RUN chmod -R 755 storage bootstrap/cache
 
-# Laravel config + migrations
-CMD php artisan config:clear && \
-    php artisan migrate:fresh --force && \
-    php artisan db:seed && \
-    php artisan config:cache && \
-    php artisan serve --host=0.0.0.0 --port=8000
+# Laravel setup and serve
+CMD php artisan config:clear && php artisan migrate:fresh --force && php artisan db:seed && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000
