@@ -1,5 +1,10 @@
 <!-- Header-Area-Start -->
-<header class="header-area parallax-bg" id="home-page" style="background: url('{{asset($hero->image)}}') no-repeat scroll top center/cover">
+@if($hero && $hero->image)
+<header class="header-area parallax-bg" id="home-page" style="background: url('{{ asset($hero->image) }}') no-repeat scroll top center/cover">
+@else
+<header class="header-area parallax-bg" id="home-page" style="background: #000;">
+@endif
+
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
