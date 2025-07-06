@@ -1,0 +1,18 @@
+/* --- Header Logo Size Fix --- */
+.main_menu .navbar-brand svg {
+    width: 250px;
+    height: auto;
+}
+
+/* --- Final, Definitive Footer Logo Fix --- */
+
+/*
+  This rule uses a highly specific selector to target the footer logo's SVG.
+  It makes the SVG fluid and responsive within its container, overriding any
+  conflicting styles from the parent theme.
+*/
+.footer-area .widget .text-box .footer-logo svg {
+    width: 100% !important;
+    max-width: 250px !important;
+    height: auto !important;
+}
