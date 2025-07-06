@@ -194,7 +194,7 @@
             openedSymbol: '<i class="fa fa-angle-right"></i>',
             appendTo: '.mainmenu-area',
             menuButton: '.navi-trigger',
-            closeOnClick: 'true' // Close menu when a link is clicked.
+            closeOnClick: true // Close menu when a link is clicked.
         });
 
 
