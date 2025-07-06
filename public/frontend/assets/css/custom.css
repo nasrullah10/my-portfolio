@@ -4,6 +4,21 @@
     height: auto;
 }
 
+/* --- Dynamic Logo Colors --- */
+.logo-part-n {
+    fill: #ff885e;
+}
+
+.logo-part-rest {
+    fill: #FFFFFF; /* Default: white */
+    transition: fill 0.3s ease-in-out;
+}
+
+/* On scroll, when header is fixed, change text to black */
+.menu_fix .logo-part-rest {
+    fill: #190844;
+}
+
 /* --- Fixed Header on Scroll Style --- */
 .main_menu.menu_fix {
     background-color: #ffffff;

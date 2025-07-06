@@ -8,16 +8,6 @@
                   font-size: 40px;
                   font-weight: 700;
               }
-              .logo-part-n {
-                  fill: #ff885e;
-              }
-              .logo-part-rest {
-                  fill: #FFFFFF; /* Default color: white */
-                  transition: fill .3s ease;
-              }
-              .menu_fix .logo-part-rest {
-                  fill: #190844; /* Color on scroll: deep blue/black */
-              }
           </style>
           <text x="0" y="45" class="logo-text-embed">
               <tspan class="logo-part-n">N</tspan>
