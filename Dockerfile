@@ -17,20 +17,19 @@ WORKDIR /var/www
 # Copy project files
 COPY . .
 
-# Install Laravel dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Install Laravel dependencies (include dev dependencies like Faker)
+RUN composer install --optimize-autoloader
 
-# Install Node modules and build Vite assets
+# Build Vite assets
 RUN npm install && npm run build
 
-# Create SQLite file (if using SQLite)
+# Create SQLite DB (optional if using SQLite)
 RUN touch /tmp/database.sqlite
 
-# Set folder permissions
+# Set permissions
 RUN chmod -R 755 storage bootstrap/cache
 
-# Expose port 8000
 EXPOSE 8000
 
-# Run migration, seed the DB, and start Laravel server
+# Run Laravel setup
 CMD php artisan migrate --force && php artisan db:seed && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000
