@@ -35,7 +35,9 @@ COPY . .
 COPY --from=node-builder /app/public/build /var/www/public/build
 
 # Install Laravel dependencies
-RUN composer install --optimize-autoloader
+RUN composer install --optimize-autoloader --no-interaction --no-scripts
+RUN php artisan package:discover --ansi
+
 
 # Set correct permissions
 RUN chmod -R 755 storage bootstrap/cache
