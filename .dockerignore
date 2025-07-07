@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment
+.env
+.env.backup
+
+# Storage & Public Artefacts
+/storage/
+!/storage/app/
+!/storage/app/public/
+/storage/framework/
+/storage/logs/
+/public/storage
+/public/hot
+
+# IDE & OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

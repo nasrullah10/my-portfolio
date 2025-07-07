@@ -3,7 +3,7 @@ FROM node:18 as node-builder
 
 WORKDIR /app
 COPY package*.json vite.config.js ./
-COPY public/ ./public/           # Copy contents to handle symlinks gracefully
+COPY public ./public           # Must exist so Vite can build to public/build
 COPY resources ./resources
 RUN npm install && npm run build 
 
