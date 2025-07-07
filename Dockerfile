@@ -27,7 +27,12 @@ COPY --from=node-builder /app/public/build /var/www/public/build
 RUN composer install --optimize-autoloader
 RUN chmod -R 755 storage bootstrap/cache
 
-CMD php artisan config:clear && \
+# The final command to run in the container.
+# This will cache configuration for performance, run database migrations safely,
+# and start the PHP-FPM server.
+CMD ls -la /var/www/public/build && \
+    ls -la /var/www/public/build/assets && \
+    php artisan config:clear && \
     php artisan migrate:fresh --force && \
     php artisan db:seed --force && \
     php artisan config:cache && \
