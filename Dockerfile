@@ -2,37 +2,46 @@
 FROM node:18 as node-builder
 
 WORKDIR /app
-COPY package*.json vite.config.js ./
-COPY public ./public           # Must exist so Vite can build to public/build
-COPY resources ./resources
-RUN npm install && npm run build 
 
-# 2️⃣ Laravel PHP stage
+# Copy Vite config and dependencies
+COPY package*.json vite.config.js ./
+
+# Copy Laravel resources and public directory
+COPY public ./public
+COPY resources ./resources
+
+# Build Vite assets
+RUN npm install && npm run build
+
+# 2️⃣ PHP stage with Laravel
 FROM php:8.2-fpm
 
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     unzip git curl libpng-dev libjpeg-dev libfreetype6-dev \
     libonig-dev libzip-dev zip sqlite3 libsqlite3-dev libpq-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_sqlite zip gd mbstring
 
+# Add Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
+# Copy Laravel source code
 COPY . .
 
+# ✅ Copy Vite build output AFTER Laravel files
 COPY --from=node-builder /app/public/build /var/www/public/build
 
+# Install Laravel dependencies
 RUN composer install --optimize-autoloader
+
+# Set correct permissions
 RUN chmod -R 755 storage bootstrap/cache
 
-# The final command to run in the container.
-# This will cache configuration for performance, run database migrations safely,
-# and start the PHP-FPM server.
-CMD ls -la /var/www/public/build && \
-    ls -la /var/www/public/build/assets && \
-    php artisan config:clear && \
+# Run Laravel + PHP dev server
+CMD php artisan config:clear && \
     php artisan migrate:fresh --force && \
     php artisan db:seed --force && \
     php artisan config:cache && \

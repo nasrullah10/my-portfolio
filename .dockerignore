@@ -10,16 +10,22 @@
 .env
 .env.backup
 
-# Storage & Public Artefacts
-/storage/
+# Storage (exclude logs/cache but keep uploads/public storage)
+storage/
 !/storage/app/
 !/storage/app/public/
+/storage/framework/
+/storage/logs/
+
+# Ignore Hot Reload (dev only)
+public/hot
+
+# Keep public folder and Vite output
 !/public/
 !/public/build/
 !/public/index.php
-/public/hot
 
-# IDE & OS files
+# IDE & OS
 .idea/
 .vscode/
 .DS_Store
