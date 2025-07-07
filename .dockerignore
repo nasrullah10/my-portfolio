@@ -14,9 +14,9 @@
 /storage/
 !/storage/app/
 !/storage/app/public/
-/storage/framework/
-/storage/logs/
-/public/storage
+!/public/
+!/public/build/
+!/public/index.php
 /public/hot
 
 # IDE & OS files
