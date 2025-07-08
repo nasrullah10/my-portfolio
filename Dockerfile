@@ -35,16 +35,19 @@ COPY . .
 COPY --from=node-builder /app/public/build /var/www/public/build
 
 # Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-interaction --no-scripts
-RUN php artisan package:discover --ansi
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-scripts
+# DO NOT RUN package:discover here — it fails in Docker build
+
 
 
 # Set correct permissions
 RUN chmod -R 755 storage bootstrap/cache
 
 # Run Laravel + PHP dev server
-CMD php artisan config:clear && \
+CMD php artisan package:discover && \
+    php artisan config:clear && \
     php artisan migrate:fresh --force && \
     php artisan db:seed --force && \
     php artisan config:cache && \
     php artisan serve --host=0.0.0.0 --port=8000
+
