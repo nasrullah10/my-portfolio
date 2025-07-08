@@ -22,24 +22,19 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy Laravel source code
 COPY . .
 
-# Copy Vite build output AFTER Laravel files
 COPY --from=node-builder /app/public/build /var/www/public/build
 
-# Install Laravel dependencies
+# Install PHP dependencies without scripts
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-scripts
 
-# Permissions fix (will be redone at runtime just to be safe)
-RUN chmod -R 755 storage bootstrap/cache
+# Set permissions just in case
+RUN chmod -R 775 storage bootstrap/cache
 
-# ✅ Final runtime command
-CMD mkdir -p storage/framework/{cache,sessions,views} && \
-    chmod -R 775 storage bootstrap/cache && \
-    php artisan package:discover && \
-    php artisan config:clear && \
-    php artisan migrate:fresh --force && \
-    php artisan db:seed --force && \
-    php artisan config:cache && \
-    php artisan serve --host=0.0.0.0 --port=8000
+# ✅ Add entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Run everything via entrypoint
+CMD ["/usr/local/bin/entrypoint.sh"]
