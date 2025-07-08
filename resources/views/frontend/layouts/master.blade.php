@@ -12,6 +12,7 @@
   <title>Portfolio | @yield('title')</title>
   <!-- Include CSS Stylesheet -->
   @include('frontend.layouts.inc.style')
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="{{ request()->routeIs('home') ? 'home-page-body dynamic-home' : 'inner-page-body dynamic-inner' }}">
