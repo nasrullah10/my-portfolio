@@ -34,20 +34,17 @@ COPY . .
 # ✅ Copy Vite build output AFTER Laravel files
 COPY --from=node-builder /app/public/build /var/www/public/build
 
-# Install Laravel dependencies
+# Create Laravel-required cache directories
+RUN mkdir -p storage/framework/{views,sessions,cache} && \
+    chmod -R 755 storage bootstrap/cache
+
+# Install Laravel dependencies without scripts (avoid root issues)
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-scripts
-# DO NOT RUN package:discover here — it fails in Docker build
 
-
-
-# Set correct permissions
-RUN chmod -R 755 storage bootstrap/cache
-
-# Run Laravel + PHP dev server
+# Run Laravel commands at runtime
 CMD php artisan package:discover && \
     php artisan config:clear && \
     php artisan migrate:fresh --force && \
     php artisan db:seed --force && \
     php artisan config:cache && \
     php artisan serve --host=0.0.0.0 --port=8000
-
