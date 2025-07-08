@@ -1,16 +1,14 @@
-# 1️⃣ Node stage for Vite
+# Node builder stage
 FROM node:18 as node-builder
-
 WORKDIR /app
-
-COPY package*.json vite.config.js tailwind.config.js postcss.config.js ./
+COPY package*.json vite.config.js ./
 COPY resources ./resources
 COPY public ./public
-
 RUN npm install && npm run build
 
-# 2️⃣ PHP + Laravel
+# Laravel app
 FROM php:8.2-fpm
+WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y \
     unzip git curl libpng-dev libjpeg-dev libfreetype6-dev \
@@ -19,25 +17,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_sqlite zip gd mbstring
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-WORKDIR /var/www
-
 COPY . .
-
-# ✅ Copy the Vite build from node stage
 COPY --from=node-builder /app/public/build /var/www/public/build
 
-# ✅ Ensure storage path exists
-RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions
-
-# ✅ Set permissions
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-scripts
 RUN chmod -R 755 storage bootstrap/cache
 
-RUN composer install --optimize-autoloader --no-scripts
-
-# ✅ Laravel boot commands
 CMD php artisan config:clear && \
     php artisan view:clear && \
+    php artisan route:clear && \
     php artisan migrate:fresh --force && \
     php artisan db:seed --force && \
     php artisan config:cache && \
