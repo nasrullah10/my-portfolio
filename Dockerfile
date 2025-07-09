@@ -24,13 +24,12 @@ WORKDIR /var/www
 
 COPY . .
 
-# ✅ Copy the Vite build from node stage
-COPY --from=node-builder /app/public/build /var/www/public/build
+# ✅ Copy full Vite build with manifest
+COPY --from=node-builder /app/public /var/www/public
 
 # ✅ Ensure storage path exists
 RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions
 
-# ✅ Set permissions
 RUN chmod -R 755 storage bootstrap/cache
 
 RUN composer install --optimize-autoloader --no-scripts
@@ -38,7 +37,6 @@ RUN composer install --optimize-autoloader --no-scripts
 # ✅ Laravel boot commands
 CMD php artisan config:clear && \
     php artisan view:clear && \
-    php artisan migrate:fresh --force && \
-    php artisan db:seed --force && \
+    php artisan migrate --force && \
     php artisan config:cache && \
     php artisan serve --host=0.0.0.0 --port=8000
