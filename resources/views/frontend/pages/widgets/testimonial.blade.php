@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 text-center">
-                <div class="section-title">
+                <div class="section-title" data-aos="zoom-in-up">
                     <h3 class="title">{{$feedbackTitle->title}}</h3>
                     <div class="desc">
                         <p>{{$feedbackTitle->sub_title}}</p>
@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="testimonial-slider">
+                <div class="testimonial-slider" data-aos="zoom-in" data-aos-delay="200">
                     @foreach ($feedbacks as $feedback)
                     <div class="single-testimonial">
                         <div class="testimonial-header">

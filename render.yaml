@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: my-portfolio
+    env: docker
+    repo: https://github.com/nasrullah10/my-portfolio
+    branch: main
+    plan: free
+    autoDeploy: true
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://nasrllah-laravel-developer.onrender.com/
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: dpg-d1lc9tbe5dus73fhpq0g-a
+      - key: DB_DATABASE
+        value: portfolio_db_j3dl
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        value: mM3kJSPaZGXoRkIzotaV1ebx6P0i0oLG

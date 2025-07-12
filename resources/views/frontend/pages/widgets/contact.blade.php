@@ -1,12 +1,10 @@
 <section class="contact-area section-padding" id="contact-page">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <div class="section-title">
-                    <h3 class="title">{{$contactTitle->title}}</h3>
-                    <div class="desc">
-                        <p>{{$contactTitle->sub_title}}</p>
-                    </div>
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <span class="subtitle">{{ __('Contact Me') }}</span>
+                    <h2 class="title">{{ __('Get In Touch') }}</h2>
                 </div>
             </div>
         </div>
@@ -15,41 +13,37 @@
                 <!-- Contact-Form -->
                 <form class="contact-form" id="contact-form">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="100">
                             <div class="form-box">
                                 <input type="text" name="name" id="form-name" class="input-box"
                                     placeholder="Name">
                                 <label for="form-name" class="icon lb-name"><i class="fal fa-user"></i></label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="200">
                             <div class="form-box">
                                 <input type="text" name="email" id="form-email" class="input-box"
                                     placeholder="Email">
-                                <label for="form-email" class="icon lb-email"><i
-                                        class="fal fa-envelope"></i></label>
+                                <label for="form-email" class="icon lb-email"><i class="fal fa-envelope"></i></label>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" data-aos="zoom-in-up" data-aos-delay="300">
                             <div class="form-box">
                                 <input type="text" name="subject" id="form-subject" class="input-box"
                                     placeholder="Subject">
-                                <label for="form-subject" class="icon lb-subject"><i
-                                        class="fal fa-check-square"></i></label>
+                                <label for="form-subject" class="icon lb-subject"><i class="fal fa-check-square"></i></label>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" data-aos="zoom-in-up" data-aos-delay="400">
                             <div class="form-box">
-                                <textarea class="input-box" id="form-message" placeholder="Message" cols="30"
-                                    rows="4" name="message"></textarea>
-                                <label for="form-message" class="icon lb-message"><i
-                                        class="fal fa-edit"></i></label>
+                                <textarea class="input-box" id="form-message" placeholder="Message"
+                                    cols="30" rows="4" name="message"></textarea>
+                                <label for="form-message" class="icon lb-message"><i class="fal fa-edit"></i></label>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" data-aos="zoom-in-up" data-aos-delay="500">
                             <div class="form-box">
-                                <button class="button-primary mouse-dir" type="submit" id="submit_btn">Send Now <span
-                                        class="dir-part"></span></button>
+                                <button type="submit" class="button-primary mouse-dir" id="submit_btn"> <span class="icon"><i class="fal fa-paper-plane"></i></span> <span class="text">Send</span> <span class="dir-part"></span></button>
                             </div>
                         </div>
                     </div>

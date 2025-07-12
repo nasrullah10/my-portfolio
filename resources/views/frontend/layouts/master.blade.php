@@ -6,19 +6,112 @@
 <html class="no-js" lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio | @yield('title')</title>
-  <!-- Include CSS Stylesheet -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-  @include('frontend.layouts.inc.style')
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio | @yield('title')</title>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('frontend.layouts.inc.style')
+
+    <style>
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.75s ease, visibility 0.75s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .bouncing-dots {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bouncing-dots div {
+            width: 16px;
+            height: 16px;
+            margin: 3px 6px;
+            border-radius: 50%;
+            background-color: #fff;
+            opacity: 1;
+            animation: bouncing-loader 0.6s infinite alternate;
+        }
+
+        @keyframes bouncing-loader {
+            to {
+                opacity: 0.1;
+                transform: translateY(-16px);
+            }
+        }
+
+        .bouncing-dots div:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .bouncing-dots div:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Particle JS styles */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Ensure it's in the background */
+        }
+        .header-area .container {
+            position: relative; /* Ensure content is on top of particles */
+            z-index: 1;
+        }
+
+        /* Shine Effect */
+        .shine {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 80%);
+            transform: skewX(-25deg);
+            animation: shine 5s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+    </style>
 </head>
 
 <body class="{{ request()->routeIs('home') ? 'home-page-body dynamic-home' : 'inner-page-body dynamic-inner' }}">
   <div class="preloader">
-    <img src="{{ asset('frontend/assets') }}/images/preloader.gif" alt="">
-  </div>
+    <div class="bouncing-dots">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
 
   <!-- include Navbar -->
 @if(Request::is('/'))
@@ -79,21 +172,40 @@
 @include('frontend.layouts.inc.navbar')
 @endif
 
-
-
-
-
-  <div class="main_wrapper" data-bs-spy="scroll" data-bs-target="#main_menu_area" data-bs-root-margin="0px 0px -40%"
-    data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary" tabindex="0">
+<div class="main_wrapper" data-bs-spy="scroll" data-bs-target="#main_menu_area" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary" tabindex="0">
 
     @yield('content')
 
     <!-- Include Footer -->
-   @include('frontend.layouts.inc.footer')
-  </div>
+    @include('frontend.layouts.inc.footer')
+</div>
 
-  <!-- Include JS script -->
-  @include('frontend.layouts.inc.script')
-</body>
+<!--====== SCRIPTS JS ======-->
+@include('frontend.layouts.inc.script')
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Preloader Fade Out
+    window.addEventListener('load', () => {
+        const preloader = document.querySelector('.preloader');
+        preloader.classList.add('hidden');
+    });
 
-</html>
+    // Initialize AOS (Animate on Scroll)
+    AOS.init({
+        duration: 1000, // values from 0 to 3000, with step 50ms
+        once: true, // whether animation should happen only once - while scrolling down
+    });
+
+    // Initialize Particles.js only on the homepage
+    if (document.body.classList.contains('home-page-body')) {
+        particlesJS.load('{{ asset('frontend/particles.json') }}', function() {
+            console.log('Particles.js config loaded');
+        });
+    }
+</script>
+
+    @stack('scripts')
+    </body>
+
+    </html>
