@@ -2,10 +2,15 @@
 FROM node:18 as node-builder
 
 WORKDIR /app
+# ✅ Laravel + PHP container setup remains same...
 
-COPY package*.json vite.config.js tailwind.config.js postcss.config.js ./
-COPY resources ./resources
-COPY public ./public
+# Copy Laravel project first
+COPY . .
+
+# ✅ Then copy ONLY the Vite build (so public/images stays)
+COPY --from=node-builder /app/public/build /var/www/public/build
+COPY --from=node-builder /app/public/manifest.json /var/www/public/manifest.json
+
 
 RUN npm install && npm run build
 
