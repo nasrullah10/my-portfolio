@@ -1,22 +1,9 @@
-<section class="quote-area section-padding-bottom">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="quote-box">
-          <div class="row ">
-            <div class="col-lg-6 offset-lg-3">
-              <div class="quote-content">
-                <h3 class="title">Your Journey Today</h3>
-                <div class="desc">
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate rem
-                    maiores, neque at officiis laudantium.</p>
-                </div>
-                <a href="#" class="button-orange mouse-dir">Get Started <span class="dir-part"></span></a>
-              </div>
-            </div>
-          </div>
+<section class="nx-section nx-cta">
+    <div class="nx-container">
+        <div class="nx-cta__box" data-aos="fade-up">
+            <h2 class="nx-heading nx-heading--light">Ready to start a project?</h2>
+            <p>Let’s build something clear, useful, and memorable together.</p>
+            <a href="{{ url('/#contact-page') }}" class="nx-btn nx-btn--lime">Get Started</a>
         </div>
-      </div>
     </div>
-  </div>
 </section>

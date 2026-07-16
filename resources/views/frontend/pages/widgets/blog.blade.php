@@ -1,36 +1,28 @@
-<section class="blog-area section-padding-top" id="blog-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <div class="section-title" data-aos="zoom-in-up">
-                    <h3 class="title">{{$blogTitle->title}}</h3>
-                    <div class="desc">
-                        {{$blogTitle->sub_title}}
-                    </div>
-                </div>
-            </div>
+<section class="nx-section nx-blog" id="blog-page">
+    <div class="nx-container">
+        <div class="nx-section__head nx-section__head--center" data-aos="fade-up">
+            <p class="nx-eyebrow">Journal</p>
+            <h2 class="nx-heading">{{ $blogTitle->title }}</h2>
+            <p class="nx-lead nx-lead--dark">{{ $blogTitle->sub_title }}</p>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="blog-slider" data-aos="zoom-in" data-aos-delay="200">
-                    @foreach ($blogs as $blog)
 
-                    <div class="single-blog">
-                        <figure class="blog-image">
-                            <img src="{{asset($blog->image)}}" alt="">
-                        </figure>
-                        <div class="blog-content">
-                            <h3 class="title"><a href="{{route('show.blog', $blog->id)}}">{{$blog->title}}</a></h3>
-                            <div class="desc">
-                                <p>{!!Str::limit($blog->description, 150, '...')!!}</p>
-                            </div>
-                            <a href="{{route('show.blog', $blog->id)}}" class="button-primary-trans mouse-dir">Read More <span
-                                    class="dir-part"></span> <i class="fal fa-arrow-right"></i></a>
+        <div class="blog-slider nx-blog__slider" data-aos="fade-up" data-aos-delay="100">
+            @foreach ($blogs as $blog)
+                <article class="nx-post single-blog">
+                    <a href="{{ route('show.blog', $blog->id) }}" class="nx-post__media">
+                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
+                    </a>
+                    <div class="nx-post__body blog-content">
+                        <h3 class="nx-post__title title">
+                            <a href="{{ route('show.blog', $blog->id) }}">{{ $blog->title }}</a>
+                        </h3>
+                        <div class="nx-post__excerpt desc">
+                            <p>{!! Str::limit(strip_tags($blog->description), 120, '...') !!}</p>
                         </div>
+                        <a href="{{ route('show.blog', $blog->id) }}" class="nx-text-link">Read more</a>
                     </div>
-                    @endforeach
-                </div>
-            </div>
+                </article>
+            @endforeach
         </div>
     </div>
 </section>

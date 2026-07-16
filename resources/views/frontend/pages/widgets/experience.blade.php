@@ -1,31 +1,26 @@
-<section class="experience-area section-padding">
-    <div class="container">
-        <div class="row d-flex align-items-center">
-            <div class="col-lg-6 d-none d-lg-block" data-aos="zoom-in-right">
-                <figure class="single-image">
-                    <img src="{{asset($experience->image)}}" alt="">
+<section class="nx-section nx-experience">
+    <div class="nx-container">
+        <div class="nx-experience__grid">
+            @if($experience->image)
+                <figure class="nx-experience__photo d-none d-lg-block" data-aos="fade-right">
+                    <img src="{{ asset($experience->image) }}" alt="{{ $experience->title }}">
                 </figure>
-            </div>
-            <div class="col-lg-6">
-                <div class="experience-text">
-                    <h3 class="title" data-aos="zoom-in-left">{{$experience->title}}</h3>
-                    <div class="desc" data-aos="zoom-in-left" data-aos-delay="200">
-                        {!!$experience->description!!}
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" data-aos="zoom-in-left" data-aos-delay="400">
-                            <div class="icon-info">
-                                <div class="icon"><i class="fas fa-mobile-android-alt"></i></div>
-                                <h6><a href="javascript:void(0)" class="text">{{$experience->phone}}</a></h6>
-                            </div>
-                        </div>
-                        <div class="col-sm-6" data-aos="zoom-in-left" data-aos-delay="500">
-                            <div class="icon-info">
-                                <div class="icon"><i class="fas fa-envelope"></i></div>
-                                <h6><a href="javascript:void(0)" class="text">{{$experience->email}}</a></h6>
-                            </div>
-                        </div>
-                    </div>
+            @endif
+            <div>
+                <p class="nx-eyebrow" data-aos="fade-up">Experience</p>
+                <h2 class="nx-heading" data-aos="fade-up" data-aos-delay="80">{{ $experience->title }}</h2>
+                <div class="nx-prose" data-aos="fade-up" data-aos-delay="140">
+                    {!! $experience->description !!}
+                </div>
+                <div class="nx-contact-pills" data-aos="fade-up" data-aos-delay="200">
+                    <a href="tel:{{ $experience->phone }}" class="nx-pill">
+                        <i class="fas fa-phone"></i>
+                        <span>{{ $experience->phone }}</span>
+                    </a>
+                    <a href="mailto:{{ $experience->email }}" class="nx-pill">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{ $experience->email }}</span>
+                    </a>
                 </div>
             </div>
         </div>

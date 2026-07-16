@@ -1,35 +1,20 @@
-<section class="testimonial-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <div class="section-title" data-aos="zoom-in-up">
-                    <h3 class="title">{{$feedbackTitle->title}}</h3>
-                    <div class="desc">
-                        <p>{{$feedbackTitle->sub_title}}</p>
-                    </div>
-                </div>
-            </div>
+<section class="nx-section nx-voices">
+    <div class="nx-container">
+        <div class="nx-section__head nx-section__head--center" data-aos="fade-up">
+            <p class="nx-eyebrow">Testimonials</p>
+            <h2 class="nx-heading nx-heading--light">{{ $feedbackTitle->title }}</h2>
+            <p class="nx-lead">{{ $feedbackTitle->sub_title }}</p>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="testimonial-slider" data-aos="zoom-in" data-aos-delay="200">
-                    @foreach ($feedbacks as $feedback)
-                    <div class="single-testimonial">
-                        <div class="testimonial-header">
-                            <div class="quote">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <h5 class="title">{{$feedback->name}}</h5>
-                            <h6 class="position">{{$feedback->position}}</h6>
-                        </div>
-                        <div class="content">
-                            {!!$feedback->description!!}
-                        </div>
-                    </div>
-                    @endforeach
 
+        <div class="testimonial-slider nx-voices__slider" data-aos="fade-up" data-aos-delay="100">
+            @foreach ($feedbacks as $feedback)
+                <div class="nx-voice single-testimonial">
+                    <div class="nx-voice__quote"><i class="fas fa-quote-left"></i></div>
+                    <h3 class="nx-voice__name title">{{ $feedback->name }}</h3>
+                    <p class="nx-voice__role position">{{ $feedback->position }}</p>
+                    <div class="nx-voice__text content">{!! $feedback->description !!}</div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

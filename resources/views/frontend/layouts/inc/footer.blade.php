@@ -6,71 +6,52 @@
     $footerHelpLinks = \App\Models\FooterHelpLink::all();
 @endphp
 
-<footer class="footer-area">
-    <div class="container">
-        <div class="row footer-widgets">
-            <div class="col-md-12 col-lg-3 widget">
-                <div class="text-box">
-                    <figure class="footer-logo">
-                        <svg viewBox="0 0 250 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">
-          <style>
-              .logo-text-embed {
-                  font-family: 'Poppins', sans-serif;
-                  font-size: 40px;
-                  font-weight: 700;
-              }
-          </style>
-          <text x="0" y="45" class="logo-text-embed">
-              <tspan fill="#ff885e">N</tspan>
-              <tspan fill="#FFFFFF">asrullah</tspan>
-          </text>
-      </svg>
-                    </figure>
-                    <p>{{$footerInfo->info}}</p>
-                    <ul class="d-flex flex-wrap">
-                        @foreach ($footerIcons as $icon)
-                            <li><a href="{{$icon->url}}"><i class="{{$icon->icon}}"></i></a></li>
-                        @endforeach
-                    </ul>
+<footer class="nx-footer">
+    <div class="nx-container">
+        <div class="nx-footer__grid">
+            <div class="nx-footer__brand">
+                <a class="nx-logo nx-logo--footer" href="{{ route('home') }}">
+                    <span class="nx-logo__mark">N</span><span class="nx-logo__text">asrullah</span>
+                </a>
+                <p>{{ $footerInfo->info }}</p>
+                <div class="nx-footer__social">
+                    @foreach ($footerIcons as $icon)
+                        <a href="{{ $icon->url }}" aria-label="Social"><i class="{{ $icon->icon }}"></i></a>
+                    @endforeach
                 </div>
             </div>
-            <div class="col-md-4 col-lg-2 offset-lg-1 widget">
-                <h3 class="widget-title">Useful Link</h3>
-                <ul class="nav-menu">
-                    @foreach ($footerUsefulLinks as $usefulLink)
-                        <li><a href="{{$usefulLink->url}}">{{$usefulLink->name}}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="col-md-4 col-lg-3 widget">
-                <h3 class="widget-title">Contact Info</h3>
-                <ul>
-                    <li>{{$footerContact->address}}</li>
-                    <li><a href="#">{{$footerContact->phone}}</a></li>
-                    <li><a href="#">{{$footerContact->email}}</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4 col-lg-3 widget">
-                <h3 class="widget-title">Help</h3>
-                <ul class="nav-menu">
-                    @foreach ($footerHelpLinks as $footerHelpLink)
-                    <li><a href="{{$footerHelpLink->url}}">{{$footerHelpLink->name}}</a></li>
-                    @endforeach
 
+            <div>
+                <h4>Useful Link</h4>
+                <ul>
+                    @foreach ($footerUsefulLinks as $usefulLink)
+                        <li><a href="{{ $usefulLink->url }}">{{ $usefulLink->name }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li>{{ $footerContact->address }}</li>
+                    <li><a href="tel:{{ $footerContact->phone }}">{{ $footerContact->phone }}</a></li>
+                    <li><a href="mailto:{{ $footerContact->email }}">{{ $footerContact->email }}</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Help</h4>
+                <ul>
+                    @foreach ($footerHelpLinks as $footerHelpLink)
+                        <li><a href="{{ $footerHelpLink->url }}">{{ $footerHelpLink->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="copyright">
-                        <p>{{$footerInfo->copy_right}}</p>
-                        <p>{{$footerInfo->powered_by}}</p>
-                    </div>
-                </div>
-            </div>
+
+        <div class="nx-footer__bottom">
+            <p>{{ $footerInfo->copy_right }}</p>
+            <p>{{ $footerInfo->powered_by }}</p>
         </div>
     </div>
 </footer>

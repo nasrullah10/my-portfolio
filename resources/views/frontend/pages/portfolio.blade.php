@@ -1,75 +1,54 @@
 @extends('frontend.layouts.master')
-@section('title','Blog')
+@section('title', 'Portfolio')
 @section('content')
 
-        <header class="site-header parallax-bg">
-            <div class="container">
-                <div class="row d-flex align-items-center">
-                    <div class="col-sm-7">
-                        <h2 class="title">Portfolio</h2>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="breadcrumbs">
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li>Portfolio</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+<header class="nx-pagehead">
+    <div class="nx-container nx-pagehead__inner">
+        <div>
+            <p class="nx-eyebrow">Work</p>
+            <h1 class="nx-heading nx-heading--light">Portfolio</h1>
+        </div>
+        <nav class="nx-crumbs" aria-label="Breadcrumb">
+            <a href="{{ route('home') }}">Home</a>
+            <span>/</span>
+            <span>Portfolio</span>
+        </nav>
+    </div>
+</header>
 
-        <!-- Portfolio-Area-Start -->
-        <section class="portfolio-area section-padding" id="portfolio-page">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="filter-menu">
-                            <li class="active" data-filter="*">All Projects</li>
-                            @foreach ($portfolioCategories as $category)
-                            <li data-filter=".{{$category->slug}}">{{$category->name}}</li>
-                            @endforeach
+<section class="nx-section nx-work">
+    <div class="nx-container">
+        <ul class="filter-menu nx-filters">
+            <li class="active" data-filter="*">All</li>
+            @foreach ($portfolioCategories as $category)
+                <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
+            @endforeach
+        </ul>
 
-                        </ul>
-                    </div>
-                </div>
-                <div class="portfolio-wrapper">
-                    <div class="row portfolios">
-                        @foreach ($portfolioItems as $item)
-
-                        <div data-wow-delay="0.3s" class="col-md-6 col-lg-4 filter-item {{$item->category->slug}}">
-                            <div class="single-portfolio">
-                                <figure class="portfolio-image">
-                                    <img src="{{asset($item->image)}}" alt="">
+        <div class="portfolio-wrapper">
+            <div class="row portfolios nx-work__grid g-4">
+                @foreach ($portfolioItems as $item)
+                    <div class="col-md-6 col-lg-4 filter-item {{ $item->category->slug }}">
+                        <article class="nx-card">
+                            <a href="{{ route('show.portfolio', $item->id) }}" class="nx-card__link">
+                                <figure class="nx-card__media">
+                                    <img src="{{ asset($item->image) }}" alt="{{ $item->title }}">
                                 </figure>
-                                <div class="portfolio-content">
-                                    <a href="{{asset($item->image)}}" data-lity class="icon"><i
-                                            class="fas fa-plus"></i></a>
-                                    <h4 class="title"><a href="{{route('show.portfolio', $item->id)}}">{{$item->title}}</a></h4>
-                                    <div class="desc">
-                                        <p>{!! Str::limit(strip_tags($item->description), 100)!!}</p>
-                                    </div>
+                                <div class="nx-card__body">
+                                    <h3 class="nx-card__title">{{ $item->title }}</h3>
+                                    <p class="nx-card__text">{!! Str::limit(strip_tags($item->description), 90) !!}</p>
                                 </div>
-                            </div>
-                        </div>
-                        @endforeach
-
-
+                            </a>
+                            <a href="{{ asset($item->image) }}" data-lity class="nx-card__zoom" aria-label="Preview">
+                                <i class="fas fa-expand"></i>
+                            </a>
+                        </article>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <a href="#" class="load-more mouse-dir">Load More <i class="fal fa-sync"></i><span
-                                class="dir-part"></span></a>
-                    </div>
-                </div>
+                @endforeach
             </div>
-        </section>
-        <!-- Portfolio-Area-End -->
+        </div>
+    </div>
+</section>
 
-        <!-- Quote-Area-Start -->
-        @include('frontend.pages.widgets.quote')
-        <!-- Quote-Area-End -->
-
+@include('frontend.pages.widgets.quote')
 @endsection

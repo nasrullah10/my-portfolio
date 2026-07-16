@@ -1,23 +1,18 @@
-<section class="about-area section-padding-top">
-    <div class="container">
-        <div class="row d-flex align-items-center">
-            <div class="col-lg-6" data-aos="zoom-in-right">
-                <figure class="about-image">
-                    <img src="{{asset($about->image)}}" alt="">
-                </figure>
-            </div>
-            <div class="col-lg-6">
-                <div class="about-text">
-                    <h3 class="title" data-aos="zoom-in-left">{{$about->title}}</h3>
-                    <div class="desc" data-aos="zoom-in-left" data-aos-delay="200">
-                        {!! $about->description !!}
-                    </div>
-                    <a href="{{route('admin.resume.download')}}" class="button-primary mouse-dir" data-aos="zoom-in-left" data-aos-delay="400">
-                        <span class="icon"><i class="fal fa-download"></i></span>
-                        <span class="text">Download Resume</span>
-                        <span class="dir-part"></span>
-                    </a>
+<section class="nx-section nx-about" id="about-page">
+    <div class="nx-container">
+        <div class="nx-about__grid">
+            <figure class="nx-about__photo" data-aos="fade-right">
+                <img src="{{ asset($about->image) }}" alt="{{ $about->title }}">
+            </figure>
+            <div class="nx-about__copy">
+                <p class="nx-eyebrow" data-aos="fade-up">About</p>
+                <h2 class="nx-heading" data-aos="fade-up" data-aos-delay="80">{{ $about->title }}</h2>
+                <div class="nx-prose" data-aos="fade-up" data-aos-delay="140">
+                    {!! $about->description !!}
                 </div>
+                <a href="{{ route('admin.resume.download') }}" class="nx-btn nx-btn--dark" data-aos="fade-up" data-aos-delay="200">
+                    Download Resume
+                </a>
             </div>
         </div>
     </div>
