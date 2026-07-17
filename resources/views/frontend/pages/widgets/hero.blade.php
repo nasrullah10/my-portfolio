@@ -20,13 +20,17 @@
                     {{ $hero->btn_text }}
                 </a>
             @endif
-            <a href="#portfolio-page" class="nx-btn nx-btn--ghost">See selected work</a>
+           <a href="https://wa.me/923152401099?text=Hi%20Nasrullah,%20I%20want%20to%20hire%20you."
+            target="_blank"
+            class="nx-btn nx-btn--ghost">
+                Hire Me
+            </a>
         </div>
     </div>
 
-    <a href="#about-page" class="nx-hero__scroll" aria-label="Scroll down">
+    <!-- <a href="#about-page" class="nx-hero__scroll" aria-label="Scroll down">
         <span>Scroll</span>
-    </a>
+    </a> -->
 </section>
 
 @push('scripts')

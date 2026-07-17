@@ -9,6 +9,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portfolio | @yield('title')</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .whatsapp-wrapper{
+            position:fixed;
+            right:25px;
+            bottom:120px;   /* 40px se 120px */
+            z-index:9999;
+        }
+                .nx-whatsapp-sticky{
+            position:fixed;
+            right:25px;
+            top:50%;
+            transform:translateY(-50%);
+            z-index:9999;
+            text-decoration:none;
+        }
+
+        /* Icon */
+
+        .nx-whatsapp-icon{
+            width:60px;
+            height:60px;
+            border-radius:50%;
+            background:#25D366;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            color:#fff;
+            font-size:30px;
+
+            box-shadow:0 10px 30px rgba(37,211,102,.35);
+
+            transition:.35s;
+            animation:whatsappPulse 2s infinite;
+        }
+
+        .nx-whatsapp-icon:hover{
+            transform:scale(1.08);
+        }
+
+        /* Tooltip */
+
+        .nx-whatsapp-tooltip{
+            position:absolute;
+            top:50%;
+            right:75px;
+
+            transform:translateY(-50%) translateX(20px);
+
+            background:#1b1b1b;
+            color:#fff;
+
+            padding:12px 18px;
+            border-radius:40px;
+
+            white-space:nowrap;
+
+            font-size:14px;
+            font-weight:600;
+
+            opacity:0;
+            visibility:hidden;
+
+            transition:.35s;
+            box-shadow:0 8px 20px rgba(0,0,0,.25);
+        }
+
+        .nx-whatsapp-tooltip::after{
+            content:'';
+            position:absolute;
+            right:-6px;
+            top:50%;
+            transform:translateY(-50%) rotate(45deg);
+
+            width:12px;
+            height:12px;
+            background:#1b1b1b;
+        }
+
+        .nx-whatsapp-sticky:hover .nx-whatsapp-tooltip{
+            opacity:1;
+            visibility:visible;
+            transform:translateY(-50%) translateX(0);
+        }
+
+        /* Pulse */
+
+        @keyframes whatsappPulse{
+
+            0%{
+                box-shadow:0 0 0 0 rgba(37,211,102,.5);
+            }
+
+            70%{
+                box-shadow:0 0 0 18px rgba(37,211,102,0);
+            }
+
+            100%{
+                box-shadow:0 0 0 0 rgba(37,211,102,0);
+            }
+
+        }
+
+        @media(max-width:768px){
+
+            .nx-whatsapp-sticky{
+                right:15px;
+            }
+
+            .nx-whatsapp-icon{
+                width:54px;
+                height:54px;
+                font-size:28px;
+            }
+
+            .nx-whatsapp-tooltip{
+                display:none;
+            }
+
+        }
+    </style>
     @include('frontend.layouts.inc.style')
 </head>
 <body class="nx-body {{ request()->routeIs('home') ? 'nx-home' : 'nx-inner' }}">
@@ -82,5 +204,19 @@
         });
     })();
 </script>
+<a href="https://wa.me/923152401099?text=Hi%20Nasrullah,%20I%20want%20to%20discuss%20a%20project."
+   target="_blank"
+   class="nx-whatsapp-sticky"
+   aria-label="Chat on WhatsApp">
+
+    <span class="nx-whatsapp-tooltip">
+         Let's Chat 👋
+    </span>
+
+    <span class="nx-whatsapp-icon">
+        <i class="fab fa-whatsapp"></i>
+    </span>
+
+</a>
 </body>
 </html>
