@@ -72,18 +72,34 @@ class HomeController extends Controller
     }
 
 
+    // public function contact(Request $request)
+    // {
+    //    $request->validate([
+    //         'name' => ['required', 'max:200'],
+    //         'subject' => ['required', 'max:300'],
+    //         'email' => ['required', 'email'],
+    //         'message' => ['required', 'max:2000'],
+    //    ]);
+
+    //    Mail::send(new ContactMail($request->all()));
+
+    //    return response(['status' => 'success', 'message' => 'Mail Sended Successfully!']);
+
+    // }
     public function contact(Request $request)
     {
-       $request->validate([
+        $request->validate([
             'name' => ['required', 'max:200'],
             'subject' => ['required', 'max:300'],
             'email' => ['required', 'email'],
             'message' => ['required', 'max:2000'],
-       ]);
+        ]);
 
-       Mail::send(new ContactMail($request->all()));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($request->all()));
 
-       return response(['status' => 'success', 'message' => 'Mail Sended Successfully!']);
-
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Mail Sent Successfully!'
+        ]);
     }
 }
