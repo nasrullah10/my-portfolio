@@ -28,17 +28,16 @@
 <script src="{{asset('assets')}}/js/custom.js"></script>
 
 <!-- Page Specific JS File -->
-<script src="{{asset('assets')}}/js/page/features-post-create.js"></script>
+<!-- <script src="{{asset('assets')}}/js/page/features-post-create.js"></script> -->
 <!-- Page Specific JS File -->
-<script src="{{asset('assets')}}/js/page/forms-advanced-forms.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
 <!-- Show dynamic validation errors -->
 <script>
+    $('select').select2();
     @if (!empty($errors->all()))
         @foreach ($errors->all() as $error)
             toastr.error("{{$error}}",)

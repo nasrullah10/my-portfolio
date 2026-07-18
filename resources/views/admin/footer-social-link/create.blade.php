@@ -8,7 +8,6 @@
         <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
       </div>
       <h1>Footer Social Links</h1>
-
     </div>
 
     <div class="section-body">
@@ -25,7 +24,14 @@
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Icon</label>
                         <div class="col-sm-12 col-md-7">
-                           <button name="icon" class="btn btn-warning" role="iconpicker"></button>
+                            <select name="icon" class="form-control" id="icon-select">
+                              <option value="">Select Icon</option>
+                              <option value="fab fa-github">GitHub</option>
+                              <option value="fab fa-linkedin-in">LinkedIn</option>
+                              <option value="fab fa-facebook-f">Facebook</option>
+                              <option value="fab fa-instagram">Instagram</option>
+                              <option value="fab fa-youtube">YouTube</option>
+                          </select>
                         </div>
                       </div>
 
@@ -50,3 +56,17 @@
     </div>
   </section>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        // Master layout ne select2 already apply kar diya hoga, usay destroy karke normal select bana do
+        if ($('#icon-select').hasClass('select2-hidden-accessible')) {
+            $('#icon-select').select2('destroy');
+        }
+
+        document.getElementById('count').innerText =
+            document.getElementById('icon-select').options.length;
+    });
+</script>
+@endpush
