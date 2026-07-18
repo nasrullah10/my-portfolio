@@ -51,7 +51,7 @@ Route::get('blog-details/{id}', [HomeController::class, 'showBlog'])->name('show
 
 Route::get('portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::post('contact', [HomeController::class, 'contact'])->name('contact');
-
+  Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
 
 /** Admin Routes */
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin', 'as' =>
     Route::resource('service', ServiceController::class);
 
     /** About Route */
-    Route::get('resume/download', [AboutController::class, 'resumeDownload'])->name('resume.download');
+  
     Route::resource('about', AboutController::class);
 
     /** Portfolio Category Route */

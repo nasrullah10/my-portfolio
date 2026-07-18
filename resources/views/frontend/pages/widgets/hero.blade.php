@@ -16,7 +16,7 @@
 
         <div class="nx-hero__actions" data-aos="fade-up" data-aos-delay="240">
             @if($hero->btn_text)
-                <a href="{{ $hero->btn_url }}" target="_blank" rel="noopener" class="nx-btn nx-btn--lime">
+                <a href="{{ route('resume.download') }}" target="_blank" rel="noopener" class="nx-btn nx-btn--lime">
                     {{ $hero->btn_text }}
                 </a>
             @endif

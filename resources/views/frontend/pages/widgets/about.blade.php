@@ -10,7 +10,7 @@
                 <div class="nx-prose" data-aos="fade-up" data-aos-delay="140">
                     {!! $about->description !!}
                 </div>
-                <a href="{{ route('admin.resume.download') }}" class="nx-btn nx-btn--dark" data-aos="fade-up" data-aos-delay="200">
+                <a href="{{ route('resume.download') }}" class="nx-btn nx-btn--dark" data-aos="fade-up" data-aos-delay="200">
                     Download Resume
                 </a>
             </div>
